@@ -6,6 +6,7 @@ namespace WebBanHang.Controllers
 {
     public class HomeController : Controller
     {
+        QlbanVaLiContext db = new QlbanVaLiContext();
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
@@ -15,7 +16,8 @@ namespace WebBanHang.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var lstsanpham = db.TDanhMucSps.ToList();
+            return View(lstsanpham);
         }
 
         public IActionResult Privacy()
