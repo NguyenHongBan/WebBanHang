@@ -3,12 +3,13 @@
     Layout = "~/Views/Shared/_LayoutIndex.cshtml";
 }
 
-@model List<TDanhMucSp>
+@using X.PagedList.Mvc.Core;
+@model X.PagedList.IPagedList<TDanhMucSp>
 @foreach(var item in Model)
 {
     <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
         <div class="featured__item">
-            <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-1.jpg" style="background-image: url(&quot;img/featured/feature-1.jpg&quot;);">
+            <div class="featured__item__pic set-bg" data-setbg="@Url.Content("../ProductsImages/Images/" + item.AnhDaiDien)" style="background-image: url(&quot;img/featured/feature-1.jpg&quot;);">
                 <ul class="featured__item__pic__hover">
                     <li><a href="#"><i class="fa fa-heart"></i></a></li>
                     <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -22,5 +23,9 @@
         </div>
     </div>
 }
+<div class="product__pagination">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new {page = page}))
+</div>
+
 
 
