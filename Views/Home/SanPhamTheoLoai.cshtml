@@ -1,17 +1,17 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿
+@{
+    ViewData["Title"] = "SanPhamTheoLoai";
     Layout = "~/Views/Shared/_LayoutIndex.cshtml";
 }
 
 @using X.PagedList.Mvc.Core;
 @model X.PagedList.IPagedList<TDanhMucSp>
-@foreach(var item in Model)
+
+@foreach (var item in Model)
 {
     @await Html.PartialAsync("PartialSanPham", item)
 }
 <div class="product__pagination">
-    @Html.PagedListPager(Model, page => Url.Action("Index", new {page = page}))
+    @Html.PagedListPager(Model, page => Url.Action("SanPhamTheoLoai", new {page = page, maLoai = ViewBag.maLoai}))
 </div>
-
-
 
