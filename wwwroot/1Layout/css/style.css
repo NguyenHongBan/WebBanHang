@@ -178,7 +178,7 @@ ol {
 	text-transform: uppercase;
 	display: inline-block;
 	padding: 13px 30px 12px;
-	background: #7fad39;
+	background: #3366CC;
 	border: none;
 }
 
@@ -459,9 +459,9 @@ ol {
 	padding: 5px 15px;
 }
 
-.header__menu ul li.active a {
-	color: #7fad39;
-}
+	.header__menu ul li.active a {
+		color: #3366CC;
+	}
 
 .header__menu ul li:hover .header__menu__dropdown {
 	top: 30px;
@@ -587,7 +587,7 @@ ol {
 }
 
 .hero__categories__all {
-	background: #7fad39;
+	background: #3366CC;
 	position: relative;
 	padding: 10px 25px 10px 40px;
 	cursor: pointer;
