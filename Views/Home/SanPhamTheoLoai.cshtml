@@ -11,7 +11,12 @@
 {
     @await Html.PartialAsync("PartialSanPham", item)
 }
-<div class="product__pagination">
+@* <div class="product__pagination">
     @Html.PagedListPager(Model, page => Url.Action("SanPhamTheoLoai", new {page = page, maLoai = ViewBag.maLoai}))
-</div>
+</div> *@
+@Html.PagedListPager(Model, page => Url.Action("SanPhamTheoLoai", new { page = page }), new X.PagedList.Web.Common.PagedListRenderOptions()
+{
+    LiElementClasses = new List<String> { "page-item" },
+    PageClasses = new List<String> { "page-link" }
+})
 
