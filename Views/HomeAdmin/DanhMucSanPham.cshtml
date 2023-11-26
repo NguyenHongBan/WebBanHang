@@ -2,6 +2,7 @@
 @using WebBanHang.Models;
 @using X.PagedList.Mvc.Core;
 @model X.PagedList.IPagedList<TDanhMucSp>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 @{
     ViewData["Title"] = "DanhMucSanPham";
@@ -11,7 +12,7 @@
 <h3>Danh mục sản phẩm</h3>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="ThemSanPhamMoi">Create New</a>
 </p>
 <table class="table">
     <thead>

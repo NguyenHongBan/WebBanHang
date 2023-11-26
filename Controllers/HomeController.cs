@@ -16,7 +16,7 @@ namespace WebBanHang.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index(int? page)
+        public IActionResult Index(int? page, string searchString)
         {
             int pageSize = 8;
             int pageNumber = page == null || page < 0 ? 1 : page.Value;
@@ -24,6 +24,18 @@ namespace WebBanHang.Controllers
             var lstsanpham = db.TDanhMucSps.AsNoTracking().OrderBy(x => x.TenSp);
             PagedList<TDanhMucSp> lst = new PagedList<TDanhMucSp>(lstsanpham, pageNumber, pageSize);
             return View(lst);
+            //var lstsanpham = db.TDanhMucSps.AsNoTracking();
+
+            //if (!string.IsNullOrEmpty(searchString))
+            //{
+            //    lstsanpham = lstsanpham.Where(x => x.TenSp.Contains(searchString));
+            //}
+
+            //var pagedList = new PagedList<TDanhMucSp>(lstsanpham.OrderBy(x => x.TenSp), pageNumber, pageSize);
+
+            //ViewBag.SearchString = searchString;
+
+            //return View(pagedList);
         }
 
         public IActionResult SanPhamTheoLoai(string maLoai, int? page)
