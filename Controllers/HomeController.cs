@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using WebBanHang.Models;
+using WebBanHang.Models.Authentication;
 using X.PagedList;
 
 namespace WebBanHang.Controllers
@@ -16,6 +17,7 @@ namespace WebBanHang.Controllers
             _logger = logger;
         }
 
+        [Authentication]
         public IActionResult Index(int? page, string searchString)
         {
             int pageSize = 8;

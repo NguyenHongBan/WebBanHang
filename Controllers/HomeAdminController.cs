@@ -55,5 +55,51 @@ namespace WebBanHang.Controllers
             }
             return View();
         }
+
+        [Route("SuaSanPham")]
+        [HttpGet]
+        public IActionResult SuaSanPham(string maSanPham)
+        {
+            ViewBag.MaChatLieu = new SelectList(db.TChatLieus.ToList(), "MaChatLieu", "ChatLieu");
+            ViewBag.MaHangSx = new SelectList(db.THangSxes.ToList(), "MaHangSx", "HangSx");
+            ViewBag.MaNuocSx = new SelectList(db.TQuocGia.ToList(), "MaNuoc", "TenNuoc");
+            ViewBag.MaLoai = new SelectList(db.TLoaiSps.ToList(), "MaLoai", "Loai");
+            ViewBag.MaDt = new SelectList(db.TLoaiDts.ToList(), "MaDt", "TenLoai");
+            var sanPham = db.TDanhMucSps.Find(maSanPham);
+            return View(sanPham);
+        }
+        [Route("ThemMoiSanPham")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult SuaSanPham(TDanhMucSp sanPham)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(sanPham).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("DanhMucSanPham", "HomeAdmin");
+            }
+            return View(sanPham);
+        }
+
+        [Route("XoaSanPham")]
+        [HttpGet]
+        public IActionResult XoaSanPham(string maSanPham) 
+        {
+            TempData["Message"] = "";
+            var chiTietSanPhams = db.TChiTietSanPhams.Where(x => x.MaSp == maSanPham).ToList();
+            if(chiTietSanPhams.Count() >0)
+            {
+                TempData["Message"] = "Không thể xóa sản phâm này";
+                return RedirectToAction("DanhMucSanPham", "HomeAdmin");
+            }
+            var anhSanPhams = db.TAnhSps.Where(x => x.MaSp == maSanPham);
+            if (anhSanPhams.Any())
+                db.RemoveRange(anhSanPhams);
+            db.Remove(db.TDanhMucSps.Find(maSanPham));
+            db.SaveChanges();
+            TempData["Message"] = "Đã xóa sản phẩm";
+            return RedirectToAction("DanhMucSanPham", "HomeAdmin");
+        }
     }
 }
